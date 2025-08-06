@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Software Types MCQ Quiz - 50 Questions</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .quiz-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .quiz-header h1 {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+        
+        .question-container {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: #f8fafc;
+        }
+        
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+        
+        .section-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 30px 0 20px 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .option {
+            margin: 10px 0;
+            padding: 12px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+            transform: translateX(5px);
+        }
+        
+        .option.selected {
+            border-color: #667eea;
+            background: #e6f3ff;
+        }
+        
+        .option.correct {
+            border-color: #48bb78;
+            background: #f0fff4;
+            color: #2f855a;
+        }
+        
+        .option.incorrect {
+            border-color: #f56565;
+            background: #fff5f5;
+            color: #c53030;
+        }
+        
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            display: none;
+            line-height: 1.6;
+        }
+        
+        .feedback.correct {
+            background: #f0fff4;
+            color: #2f855a;
+            border: 1px solid #48bb78;
+        }
+        
+        .feedback.incorrect {
+            background: transparent !important;
+            color: inherit !important;
+            border: none !important;
+        }
+        
+        .submit-btn, .reset-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 10px 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        
+        .reset-btn {
+            background: #718096;
+        }
+        
+        .reset-btn:hover {
+            background: #4a5568;
+            transform: translateY(-2px);
+        }
+        
+        .score-display {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background: #edf2f7;
+            color: #2d3748;
+            border: 3px solid #cbd5e0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 6px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, #48bb78, #38a169);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .question-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+            justify-content: center;
+        }
+
+        .question-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e2e8f0;
+            color: #4a5568;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .question-num:hover {
+            background: #cbd5e0;
+            transform: scale(1.1);
+        }
+
+        .question-num.answered {
+            background: #bee3f8;
+            color: #2b6cb0;
+        }
+
+        .question-num.current {
+            background: #667eea;
+            color: white;
+            transform: scale(1.15);
+        }
+
+        .stats-display {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f7fafc;
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>🖥️ Enhanced Software Types Quiz</h1>
+            <p><strong>50 Questions</strong> - Progressive learning from basic concepts to advanced applications</p>
+            
+            <div class="stats-display">
+                <div class="stat-item">
+                    <div class="stat-number" id="answeredCount">0</div>
+                    <div class="stat-label">Answered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50</div>
+                    <div class="stat-label">Total</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="progressPercent">0%</div>
+                    <div class="stat-label">Complete</div>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <div class="question-nav" id="questionNav"></div>
+        </div>
+
+        <div id="quiz-content">
+            
+            <!-- SECTION 1: FUNDAMENTAL CONCEPTS (Questions 1-8) -->
+            <div class="section-header">📚 Section 1: Fundamental Software Concepts</div>
+
+            <!-- Question 1 - Basic Definition -->
+            <div class="question-container" data-question="1">
+                <div class="question">1. Which of the following is the correct definition of software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Physical components of a computer</li>
+                    <li class="option" data-answer="b">B) A collection of instructions, programs, or data that tells a computer how to work</li>
+                    <li class="option" data-answer="c">C) Internet connectivity protocols</li>
+                    <li class="option" data-answer="d">D) Electronic circuits and processors</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) A collection of instructions, programs, or data that tells a computer how to work</strong><br>
+                    Software is intangible and exists as code, applications, and programs, unlike hardware which consists of physical components.
+                </div>
+            </div>
+
+            <!-- Question 2 - Main Categories -->
+            <div class="question-container" data-question="2">
+                <div class="question">2. How many main categories can software be broadly classified into?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Five</li>
+                    <li class="option" data-answer="b">B) Three</li>
+                    <li class="option" data-answer="c">C) Two</li>
+                    <li class="option" data-answer="d">D) Four</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Three</strong><br>
+                    Software can be broadly categorized into three main types: System Software, Application Software, and Programming Software.
+                </div>
+            </div>
+
+            <!-- Question 3 - Understanding Software Types -->
+            <div class="question-container" data-question="3">
+                <div class="question">3. What is the key takeaway about understanding software types in today's digital world?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) It's only important for programmers</li>
+                    <li class="option" data-answer="b">B) It's essential for making informed decisions about which tools to use</li>
+                    <li class="option" data-answer="c">C) Software categories never change</li>
+                    <li class="option" data-answer="d">D) Only expensive software is worth using</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) It's essential for making informed decisions about which tools to use</strong><br>
+                    Understanding different types of software and their uses is essential whether you're setting up a personal computer, managing a business, or developing applications.
+                </div>
+            </div>
+
+            <!-- Question 4 - Modern Applications -->
+            <div class="question-container" data-question="4">
+                <div class="question">4. Modern applications often combine features from multiple categories. What should you focus on when identifying them?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) The software name</li>
+                    <li class="option" data-answer="b">B) The installation size</li>
+                    <li class="option" data-answer="c">C) The primary function and use case</li>
+                    <li class="option" data-answer="d">D) The company that made it</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) The primary function and use case</strong><br>
+                    The guide emphasizes focusing on the primary function and use case when identifying software types, as categories often overlap in modern applications.
+                </div>
+            </div>
+
+            <!-- Question 5 - Software Identification Process -->
+            <div class="question-container" data-question="5">
+                <div class="question">5. What is the first step in the software identification process?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Check installation location</li>
+                    <li class="option" data-answer="b">B) Examine resource usage</li>
+                    <li class="option" data-answer="c">C) Observe how you access the software</li>
+                    <li class="option" data-answer="d">D) Look at dependencies</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Observe how you access the software</strong><br>
+                    The step-by-step identification process starts with observing how you access the software (desktop shortcut, web browser, app store download, command line).
+                </div>
+            </div>
+
+            <!-- Question 6 - Cloud Computing Definition -->
+            <div class="question-container" data-question="6">
+                <div class="question">6. What is cloud computing?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Software installed only on local computers</li>
+                    <li class="option" data-answer="b">B) The delivery of computing services over the internet, including storage, servers, and software</li>
+                    <li class="option" data-answer="c">C) A type of programming language</li>
+                    <li class="option" data-answer="d">D) Hardware components inside a computer</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) The delivery of computing services over the internet, including storage, servers, and software</strong><br>
+                    Cloud computing provides on-demand access to computing resources via the internet, allowing users to access software, storage, and processing power without owning physical hardware.
+                </div>
+            </div>
+
+            <!-- Question 7 - Deployment Meaning -->
+            <div class="question-container" data-question="7">
+                <div class="question">7. In software context, what does "deployment" mean?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Writing code for software applications</li>
+                    <li class="option" data-answer="b">B) The process of making software available and accessible to users</li>
+                    <li class="option" data-answer="c">C) Testing software for bugs and errors</li>
+                    <li class="option" data-answer="d">D) Designing user interfaces for applications</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) The process of making software available and accessible to users</strong><br>
+                    Software deployment refers to the activities and processes involved in making software systems available for use.
+                </div>
+            </div>
+
+            <!-- Question 8 - Software Decision Making -->
+            <div class="question-container" data-question="8">
+                <div class="question">8. What should be the FIRST consideration when making software decisions?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Cost</li>
+                    <li class="option" data-answer="b">B) Platform compatibility</li>
+                    <li class="option" data-answer="c">C) Learning curve</li>
+                    <li class="option" data-answer="d">D) Specific needs and requirements</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Specific needs and requirements</strong><br>
+                    The evaluation process begins with identifying requirements and listing specific needs and must-have features before considering other factors.
+                </div>
+            </div>
+
+            <!-- SECTION 2: SYSTEM SOFTWARE (Questions 9-18) -->
+            <div class="section-header">⚙️ Section 2: System Software</div>
+
+            <!-- Question 9 - OS Functions -->
+            <div class="question-container" data-question="9">
+                <div class="question">9. Which of the following is NOT a key function of operating systems?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Memory management</li>
+                    <li class="option" data-answer="b">B) Process scheduling</li>
+                    <li class="option" data-answer="c">C) Creating presentations</li>
+                    <li class="option" data-answer="d">D) File system management</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Creating presentations</strong><br>
+                    Creating presentations is an application software function. OS functions include memory management, process scheduling, file system management, device driver coordination, and user interface provision.
+                </div>
+            </div>
+
+            <!-- Question 10 - Server OS -->
+            <div class="question-container" data-question="10">
+                <div class="question">10. Which operating system is an example of a server OS?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) iOS</li>
+                    <li class="option" data-answer="b">B) Android</li>
+                    <li class="option" data-answer="c">C) iPadOS</li>
+                    <li class="option" data-answer="d">D) Red Hat Enterprise Linux</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Red Hat Enterprise Linux</strong><br>
+                    Red Hat Enterprise Linux is a server operating system. iOS, Android, and iPadOS are mobile operating systems.
+                </div>
+            </div>
+
+            <!-- Question 11 - Device Drivers Purpose -->
+            <div class="question-container" data-question="11">
+                <div class="question">11. What is the primary purpose of device drivers?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Enable communication between the operating system and specific hardware components</li>
+                    <li class="option" data-answer="b">B) Manage user accounts</li>
+                    <li class="option" data-answer="c">C) Create documents</li>
+                    <li class="option" data-answer="d">D) Provide internet access</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) Enable communication between the operating system and specific hardware components</strong><br>
+                    Device drivers act as translators between the operating system and hardware components like graphics cards, printers, and network adapters.
+                </div>
+            </div>
+
+            <!-- Question 12 - CCleaner Category -->
+            <div class="question-container" data-question="12">
+                <div class="question">12. Which category does CCleaner belong to within System Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Operating Systems</li>
+                    <li class="option" data-answer="b">B) System Utilities</li>
+                    <li class="option" data-answer="c">C) Device Drivers</li>
+                    <li class="option" data-answer="d">D) Firmware</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) System Utilities</strong><br>
+                    CCleaner is a system cleaning utility that performs maintenance and optimization tasks, categorized under system utilities within System Software.
+                </div>
+            </div>
+
+            <!-- Question 13 - BIOS/UEFI Type -->
+            <div class="question-container" data-question="13">
+                <div class="question">13. What type of software is BIOS/UEFI?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Application software</li>
+                    <li class="option" data-answer="b">B) Utility software</li>
+                    <li class="option" data-answer="c">C) Firmware</li>
+                    <li class="option" data-answer="d">D) Programming software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Firmware</strong><br>
+                    BIOS/UEFI is firmware - low-level software stored in non-volatile memory that controls basic hardware functions during computer startup.
+                </div>
+            </div>
+
+            <!-- Question 14 - BIOS Primary Function -->
+            <div class="question-container" data-question="14">
+                <div class="question">14. What is the primary function of BIOS/UEFI during computer startup?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Manage files and folders on the hard drive</li>
+                    <li class="option" data-answer="b">B) Control basic hardware functions and initialize the computer before the operating system loads</li>
+                    <li class="option" data-answer="c">C) Provide internet connectivity</li>
+                    <li class="option" data-answer="d">D) Run application software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Control basic hardware functions and initialize the computer before the operating system loads</strong><br>
+                    BIOS/UEFI is firmware that performs hardware initialization during the boot process, runs power-on self-tests, and loads the operating system.
+                </div>
+            </div>
+
+            <!-- Question 15 - Administrative Privileges -->
+            <div class="question-container" data-question="15">
+                <div class="question">15. Software that requires administrative privileges is typically what type?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) System software</li>
+                    <li class="option" data-answer="b">B) Application software</li>
+                    <li class="option" data-answer="c">C) Programming software</li>
+                    <li class="option" data-answer="d">D) Entertainment software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) System software</strong><br>
+                    System software indicators include requiring administrative privileges, starting automatically with computer, and being difficult to uninstall or disable.
+                </div>
+            </div>
+
+            <!-- Question 16 - Device Driver Example -->
+            <div class="question-container" data-question="16">
+                <div class="question">16. When you connect a new printer to your computer, what type of software is required to enable proper communication between the operating system and the printer hardware?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Application Software</li>
+                    <li class="option" data-answer="b">B) Device Drivers</li>
+                    <li class="option" data-answer="c">C) Programming Software</li>
+                    <li class="option" data-answer="d">D) Web Browser</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Device Drivers</strong><br>
+                    Device drivers are specialized system software that act as translators between the operating system and specific hardware components.
+                </div>
+            </div>
+
+            <!-- Question 17 - System Software Scenario -->
+            <div class="question-container" data-question="17">
+                <div class="question">17. 🎯 <strong>Scenario:</strong> Sarah just bought a new computer and needs to install something that will manage her computer's memory, handle file storage, and provide a desktop interface where she can run other programs. What type of software does Sarah need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) System Software</li>
+                    <li class="option" data-answer="b">B) Application Software</li>
+                    <li class="option" data-answer="c">C) Programming Software</li>
+                    <li class="option" data-answer="d">D) Utility Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) System Software</strong><br>
+                    Sarah needs an operating system, which is system software. Operating systems manage hardware resources, provide user interfaces, handle memory management, file system management, and serve as a platform for running other software.
+                </div>
+            </div>
+
+            <!-- Question 18 - System Utilities Scenario -->
+            <div class="question-container" data-question="18">
+                <div class="question">18. 🎯 <strong>Scenario:</strong> David's computer is running slowly, so he wants to clean up temporary files, defragment his hard drive, monitor system performance, and scan for malware to optimize his computer's performance. What subcategory of System Software does David need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Operating Systems</li>
+                    <li class="option" data-answer="b">B) System Utilities - Performance and Security</li>
+                    <li class="option" data-answer="c">C) Device Drivers</li>
+                    <li class="option" data-answer="d">D) Firmware</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) System Utilities - Performance and Security</strong><br>
+                    David needs System Utilities combining Performance tools (like Task Manager, system optimization tools), Disk Management (like CCleaner, defragmentation tools), and Security software (antivirus/anti-malware).
+                </div>
+            </div>
+
+            <!-- SECTION 3: APPLICATION SOFTWARE (Questions 19-35) -->
+            <div class="section-header">📱 Section 3: Application Software</div>
+
+            <!-- Question 19 - Office Suite -->
+            <div class="question-container" data-question="19">
+                <div class="question">19. Which office suite includes Word, Excel, PowerPoint, and Outlook?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Google Workspace</li>
+                    <li class="option" data-answer="b">B) LibreOffice</li>
+                    <li class="option" data-answer="c">C) Apple iWork</li>
+                    <li class="option" data-answer="d">D) Microsoft Office</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Microsoft Office</strong><br>
+                    Microsoft Office is the suite that includes Word, Excel, PowerPoint, and Outlook as its main applications.
+                </div>
+            </div>
+
+            <!-- Question 20 - Note-taking Tool -->
+            <div class="question-container" data-question="20">
+                <div class="question">20. Which specialized productivity tool is mentioned for note-taking?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Notion</li>
+                    <li class="option" data-answer="b">B) Blender</li>
+                    <li class="option" data-answer="c">C) Spotify</li>
+                    <li class="option" data-answer="d">D) Steam</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) Notion</strong><br>
+                    Notion is a specialized productivity tool for note-taking, along with Evernote, OneNote, and Obsidian.
+                </div>
+            </div>
+
+            <!-- Question 21 - Adobe Creative Suite -->
+            <div class="question-container" data-question="21">
+                <div class="question">21. Adobe Creative Suite falls under which subcategory of Application Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Productivity Software</li>
+                    <li class="option" data-answer="b">B) Creative Software</li>
+                    <li class="option" data-answer="c">C) Business Software</li>
+                    <li class="option" data-answer="d">D) Communication Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Creative Software</strong><br>
+                    Adobe Creative Suite (Photoshop, Illustrator, InDesign) is professional creative software for graphics and design work.
+                </div>
+            </div>
+
+            <!-- Question 22 - 3D Modeling Software -->
+            <div class="question-container" data-question="22">
+                <div class="question">22. Which software is specifically mentioned for 3D modeling within Creative Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Audacity</li>
+                    <li class="option" data-answer="b">B) Discord</li>
+                    <li class="option" data-answer="c">C) Blender</li>
+                    <li class="option" data-answer="d">D) QuickBooks</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Blender</strong><br>
+                    Blender is mentioned as 3D modeling software, along with Autodesk Maya, SketchUp, and Cinema 4D.
+                </div>
+            </div>
+
+            <!-- Question 23 - Zoom Classification -->
+            <div class="question-container" data-question="23">
+                <div class="question">23. Zoom is classified under which subcategory of Application Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Entertainment Software</li>
+                    <li class="option" data-answer="b">B) Educational Software</li>
+                    <li class="option" data-answer="c">C) Business Software</li>
+                    <li class="option" data-answer="d">D) Communication Software - Video Conferencing</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Communication Software - Video Conferencing</strong><br>
+                    Zoom is specifically categorized under Communication Software in the Video Conferencing subcategory, along with Microsoft Teams, Google Meet, and Skype.
+                </div>
+            </div>
+
+            <!-- Question 24 - Salesforce CRM -->
+            <div class="question-container" data-question="24">
+                <div class="question">24. Salesforce belongs to which subcategory of Business Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Customer Relationship Management (CRM)</li>
+                    <li class="option" data-answer="b">B) Accounting</li>
+                    <li class="option" data-answer="c">C) Enterprise Resource Planning (ERP)</li>
+                    <li class="option" data-answer="d">D) Human Resources</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) Customer Relationship Management (CRM)</strong><br>
+                    Salesforce is specifically listed under the CRM subcategory of Business Software, along with HubSpot and Zoho.
+                </div>
+            </div>
+
+            <!-- Question 25 - Web Browsers -->
+            <div class="question-container" data-question="25">
+                <div class="question">25. Web browsers like Chrome, Firefox, and Safari are examples of which type of software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) System Software</li>
+                    <li class="option" data-answer="b">B) Programming Software</li>
+                    <li class="option" data-answer="c">C) Application Software</li>
+                    <li class="option" data-answer="d">D) Firmware</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Application Software</strong><br>
+                    Web browsers are application software that perform specific tasks for end users - specifically enabling access to and interaction with web content.
+                </div>
+            </div>
+
+            <!-- Question 26 - Home Office Recommendation -->
+            <div class="question-container" data-question="26">
+                <div class="question">26. Which software would be recommended for a home office setup requiring document creation?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Blender</li>
+                    <li class="option" data-answer="b">B) Microsoft 365 or Google Workspace</li>
+                    <li class="option" data-answer="c">C) AutoCAD</li>
+                    <li class="option" data-answer="d">D) Final Cut Pro</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Microsoft 365 or Google Workspace</strong><br>
+                    For home office productivity needs including document creation, Microsoft 365 or Google Workspace are recommended office suites.
+                </div>
+            </div>
+
+            <!-- Question 27 - Cloud Storage Services -->
+            <div class="question-container" data-question="27">
+                <div class="question">27. Which of the following are commonly used online cloud storage services?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Adobe Photoshop, Microsoft Word, and Excel</li>
+                    <li class="option" data-answer="b">B) Windows, macOS, and Linux</li>
+                    <li class="option" data-answer="c">C) Google Drive, Dropbox, OneDrive, and iCloud</li>
+                    <li class="option" data-answer="d">D) Chrome, Firefox, Safari, and Edge</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Google Drive, Dropbox, OneDrive, and iCloud</strong><br>
+                    These are popular cloud storage services that allow users to store, sync, and share files online.
+                </div>
+            </div>
+
+            <!-- Question 28 - Graphic Designer Scenario -->
+            <div class="question-container" data-question="28">
+                <div class="question">28. 🎯 <strong>Scenario:</strong> Mark is a graphic designer who needs to edit photos, create digital artwork, and design logos for his clients. He's looking for software that will help him manipulate images and create visual content. What subcategory of Application Software should Mark use?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Productivity Software</li>
+                    <li class="option" data-answer="b">B) Creative Software - Graphics and Design</li>
+                    <li class="option" data-answer="c">C) Business Software</li>
+                    <li class="option" data-answer="d">D) Communication Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Creative Software - Graphics and Design</strong><br>
+                    Mark needs Creative Software specifically in the Graphics and Design subcategory, such as Adobe Creative Suite (Photoshop, Illustrator) or alternatives like GIMP and Inkscape.
+                </div>
+            </div>
+
+            <!-- Question 29 - Business Software Scenario -->
+            <div class="question-container" data-question="29">
+                <div class="question">29. 🎯 <strong>Scenario:</strong> Jenny runs a small business and needs to create invoices, track expenses, manage customer information, and generate financial reports. She's looking for software to help with these business tasks. What subcategory of Application Software should Jenny use?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Business Software - Accounting and CRM</li>
+                    <li class="option" data-answer="b">B) Productivity Software</li>
+                    <li class="option" data-answer="c">C) Creative Software</li>
+                    <li class="option" data-answer="d">D) Educational Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) Business Software - Accounting and CRM</strong><br>
+                    Jenny needs Business Software, specifically combining Accounting software (like QuickBooks) for financial tasks and CRM software (like Salesforce or HubSpot) for customer management.
+                </div>
+            </div>
+
+            <!-- Question 30 - Communication Software Scenario -->
+            <div class="question-container" data-question="30">
+                <div class="question">30. 🎯 <strong>Scenario:</strong> Maria wants to video chat with her family overseas, share documents with her study group, and collaborate on a presentation in real-time with her classmates. What subcategory of Application Software does Maria need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Entertainment Software</li>
+                    <li class="option" data-answer="b">B) Communication Software - Video Conferencing and Collaboration</li>
+                    <li class="option" data-answer="c">C) Educational Software</li>
+                    <li class="option" data-answer="d">D) Creative Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Communication Software - Video Conferencing and Collaboration</strong><br>
+                    Maria needs Communication Software, specifically combining Video Conferencing tools (like Zoom, Microsoft Teams) and Collaboration platforms (like Slack, Google Workspace) for real-time teamwork.
+                </div>
+            </div>
+
+            <!-- Question 31 - Audio Production Scenario -->
+            <div class="question-container" data-question="31">
+                <div class="question">31. 🎯 <strong>Scenario:</strong> Emma is a music producer who needs to record audio tracks, edit sound files, add effects to recordings, mix multiple audio channels, and produce final music tracks for her album. What subcategory of Creative Software should Emma use?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Graphics and Design</li>
+                    <li class="option" data-answer="b">B) Web Design</li>
+                    <li class="option" data-answer="c">C) 3D Modeling</li>
+                    <li class="option" data-answer="d">D) Audio/Video Editing - Audio</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Audio/Video Editing - Audio</strong><br>
+                    Emma needs Creative Software specifically in the Audio/Video Editing category, focusing on Audio tools like Audacity, Adobe Audition, Pro Tools, or Logic Pro for professional music production.
+                </div>
+            </div>
+
+            <!-- Question 32 - Server Administrator Scenario -->
+            <div class="question-container" data-question="32">
+                <div class="question">32. 🎯 <strong>Scenario:</strong> Robert is an IT administrator managing a company's network servers. He needs software that will control server hardware, manage multiple user accounts, handle network security, allocate system resources, and provide a foundation for running business applications on the servers. What subcategory of System Software does Robert need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Operating Systems - Server OS</li>
+                    <li class="option" data-answer="b">B) System Utilities</li>
+                    <li class="option" data-answer="c">C) Device Drivers</li>
+                    <li class="option" data-answer="d">D) Firmware</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) Operating Systems - Server OS</strong><br>
+                    Robert needs Server Operating Systems like Windows Server, Red Hat Enterprise Linux, or Ubuntu Server, which are specifically designed for server environments to manage hardware resources and provide platforms for business applications.
+                </div>
+            </div>
+
+            <!-- Question 33 - Healthcare Software Scenario -->
+            <div class="question-container" data-question="33">
+                <div class="question">33. 🎯 <strong>Scenario:</strong> Dr. Martinez works at a hospital and needs software to manage patient records electronically, view medical imaging scans (X-rays, MRIs), schedule appointments, and track treatment histories. She also needs to ensure all patient data is secure and compliant with healthcare regulations. What subcategory of Specialized Software does Dr. Martinez need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Financial Software - Enterprise</li>
+                    <li class="option" data-answer="b">B) Healthcare Software - EHR and Medical Imaging</li>
+                    <li class="option" data-answer="c">C) Scientific and Engineering Software</li>
+                    <li class="option" data-answer="d">D) Security Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Healthcare Software - EHR and Medical Imaging</strong><br>
+                    Dr. Martinez needs Healthcare Software combining Electronic Health Records (EHR) systems like Epic or Cerner for patient management, and Medical Imaging software like DICOM viewers or Osirix for viewing scans.
+                </div>
+            </div>
+
+            <!-- Question 34 - Research Mathematics Scenario -->
+            <div class="question-container" data-question="34">
+                <div class="question">34. 🎯 <strong>Scenario:</strong> Professor Johnson is a research mathematician who needs to perform complex statistical calculations, create mathematical models, run simulations for her research, and analyze large datasets. She also needs to create professional research papers with mathematical equations and generate graphs for her publications. What combination of software categories does Professor Johnson need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Only Creative Software for document creation</li>
+                    <li class="option" data-answer="b">B) Scientific and Engineering Software - Mathematical, plus Productivity Software for documentation</li>
+                    <li class="option" data-answer="c">C) Only Programming Software for data analysis</li>
+                    <li class="option" data-answer="d">D) Business Software for data management</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Scientific and Engineering Software - Mathematical, plus Productivity Software for documentation</strong><br>
+                    Professor Johnson needs Scientific and Engineering Software like MATLAB, Mathematica, R, or SAS for mathematical analysis and statistical work, combined with Productivity Software like Microsoft Office or LaTeX for creating professional research documents.
+                </div>
+            </div>
+
+            <!-- Question 35 - Device Driver Scenario -->
+            <div class="question-container" data-question="35">
+                <div class="question">35. 🎯 <strong>Scenario:</strong> Tom's computer isn't recognizing his new wireless mouse. He needs to download and install something that will allow his operating system to communicate properly with this hardware device. What does Tom need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Application Software</li>
+                    <li class="option" data-answer="b">B) Programming Software</li>
+                    <li class="option" data-answer="c">C) Entertainment Software</li>
+                    <li class="option" data-answer="d">D) System Software (Device Driver)</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) System Software (Device Driver)</strong><br>
+                    Tom needs a device driver, which is system software that enables communication between the operating system and specific hardware components like his wireless mouse.
+                </div>
+            </div>
+
+            <!-- SECTION 4: PROGRAMMING SOFTWARE (Questions 36-42) -->
+            <div class="section-header">💻 Section 4: Programming Software</div>
+
+            <!-- Question 36 - Xcode IDE -->
+            <div class="question-container" data-question="36">
+                <div class="question">36. Which IDE is specifically mentioned for iOS/macOS development under Programming Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Android Studio</li>
+                    <li class="option" data-answer="b">B) PyCharm</li>
+                    <li class="option" data-answer="c">C) WebStorm</li>
+                    <li class="option" data-answer="d">D) Xcode</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Xcode</strong><br>
+                    Xcode is listed as the language-specific IDE for iOS/macOS development under Programming Software.
+                </div>
+            </div>
+
+            <!-- Question 37 - Git Version Control -->
+            <div class="question-container" data-question="37">
+                <div class="question">37. Git is categorized under which subcategory of Programming Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Integrated Development Environments (IDEs)</li>
+                    <li class="option" data-answer="b">B) Version Control Systems</li>
+                    <li class="option" data-answer="c">C) Compilers and Interpreters</li>
+                    <li class="option" data-answer="d">D) Database Management Systems</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Version Control Systems</strong><br>
+                    Git is specifically listed under Version Control Systems in Programming Software, described as a distributed version control system.
+                </div>
+            </div>
+
+            <!-- Question 38 - MongoDB Database -->
+            <div class="question-container" data-question="38">
+                <div class="question">38. MongoDB belongs to which subcategory of Database Management Systems?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) NoSQL</li>
+                    <li class="option" data-answer="b">B) Relational</li>
+                    <li class="option" data-answer="c">C) Cloud</li>
+                    <li class="option" data-answer="d">D) Embedded</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) NoSQL</strong><br>
+                    MongoDB is specifically listed under NoSQL databases in Programming Software, along with Cassandra, Redis, and CouchDB.
+                </div>
+            </div>
+
+            <!-- Question 39 - Development Team Version Control -->
+            <div class="question-container" data-question="39">
+                <div class="question">39. For a software development team, which version control platform is recommended?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Dropbox</li>
+                    <li class="option" data-answer="b">B) Git with GitHub or GitLab</li>
+                    <li class="option" data-answer="c">C) Google Drive</li>
+                    <li class="option" data-answer="d">D) OneDrive</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Git with GitHub or GitLab</strong><br>
+                    For software development teams, Git version control with platforms like GitHub or GitLab is recommended for code management and collaboration.
+                </div>
+            </div>
+
+            <!-- Question 40 - Application vs Programming Software -->
+            <div class="question-container" data-question="40">
+                <div class="question">40. What is the key difference between Application Software and Programming Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Application software is used by end users to perform specific tasks, while programming software is used by developers to create other software</li>
+                    <li class="option" data-answer="b">B) Application software runs on servers, while programming software runs on personal computers</li>
+                    <li class="option" data-answer="c">C) Application software is free, while programming software is always paid</li>
+                    <li class="option" data-answer="d">D) Application software requires internet connection, while programming software works offline</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) Application software is used by end users to perform specific tasks, while programming software is used by developers to create other software</strong><br>
+                    Application software (like Microsoft Word, Photoshop, games) is designed for end users to accomplish specific tasks. Programming software (like IDEs, compilers, debuggers) provides tools for developers to create, debug, and maintain other software.
+                </div>
+            </div>
+
+            <!-- Question 41 - Software Developer Scenario -->
+            <div class="question-container" data-question="41">
+                <div class="question">41. 🎯 <strong>Scenario:</strong> Lisa is a software developer working on a mobile app. She needs tools that will help her write code, debug errors, manage different versions of her project, and compile her code into a working application. What type of software does Lisa need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) System Software</li>
+                    <li class="option" data-answer="b">B) Application Software</li>
+                    <li class="option" data-answer="c">C) Programming Software</li>
+                    <li class="option" data-answer="d">D) Communication Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Programming Software</strong><br>
+                    Lisa needs programming software including IDEs (like Android Studio or Xcode), version control systems (like Git), compilers, and debugging tools. Programming software provides tools for creating, debugging, and maintaining other software.
+                </div>
+            </div>
+
+            <!-- Question 42 - IDE Learning Scenario -->
+            <div class="question-container" data-question="42">
+                <div class="question">42. 🎯 <strong>Scenario:</strong> Alex is learning to code and needs a tool where he can write Python scripts, see syntax highlighting, run his code to test it, and get help debugging when something goes wrong. What subcategory of Programming Software does Alex need?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Version Control Systems</li>
+                    <li class="option" data-answer="b">B) Database Management Systems</li>
+                    <li class="option" data-answer="c">C) Compilers and Interpreters</li>
+                    <li class="option" data-answer="d">D) Integrated Development Environments (IDEs)</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Integrated Development Environments (IDEs)</strong><br>
+                    Alex needs an IDE such as PyCharm (language-specific for Python) or VS Code (general purpose), which provide comprehensive development features including code editing, syntax highlighting, debugging, and testing capabilities.
+                </div>
+            </div>
+
+            <!-- SECTION 5: SPECIALIZED SOFTWARE (Questions 43-46) -->
+            <div class="section-header">🔧 Section 5: Specialized Software</div>
+
+            <!-- Question 43 - Norton Antivirus -->
+            <div class="question-container" data-question="43">
+                <div class="question">43. Norton antivirus belongs to which subcategory of Specialized Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Scientific and Engineering Software</li>
+                    <li class="option" data-answer="b">B) Security Software - Antivirus</li>
+                    <li class="option" data-answer="c">C) Financial Software</li>
+                    <li class="option" data-answer="d">D) Healthcare Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Security Software - Antivirus</strong><br>
+                    Norton is specifically listed under Security Software in the Antivirus subcategory within Specialized Software Categories.
+                </div>
+            </div>
+
+            <!-- Question 44 - MATLAB -->
+            <div class="question-container" data-question="44">
+                <div class="question">44. MATLAB is categorized under which subcategory of Specialized Software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Security Software</li>
+                    <li class="option" data-answer="b">B) Financial Software</li>
+                    <li class="option" data-answer="c">C) Scientific and Engineering Software - Mathematical</li>
+                    <li class="option" data-answer="d">D) Healthcare Software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Scientific and Engineering Software - Mathematical</strong><br>
+                    MATLAB is specifically listed under Scientific and Engineering Software in the Mathematical subcategory, along with Mathematica, R, and SAS.
+                </div>
+            </div>
+
+            <!-- Question 45 - Cloud Computing Players -->
+            <div class="question-container" data-question="45">
+                <div class="question">45. Which companies are considered major players in cloud computing services?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Netflix, Spotify, and Instagram</li>
+                    <li class="option" data-answer="b">B) Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform</li>
+                    <li class="option" data-answer="c">C) Adobe, Autodesk, and Blender</li>
+                    <li class="option" data-answer="d">D) Steam, Epic Games, and PlayStation</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform</strong><br>
+                    AWS, Microsoft Azure, and Google Cloud Platform are the three largest cloud service providers, offering infrastructure, platform, and software services to businesses and individuals worldwide.
+                </div>
+            </div>
+
+            <!-- Question 46 - Technology Trends -->
+            <div class="question-container" data-question="46">
+                <div class="question">46. According to the guide, what is becoming increasingly common in software deployment?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Desktop-only applications</li>
+                    <li class="option" data-answer="b">B) Command-line interfaces</li>
+                    <li class="option" data-answer="c">C) Cloud-based and hybrid deployment models</li>
+                    <li class="option" data-answer="d">D) Single-platform software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Cloud-based and hybrid deployment models</strong><br>
+                    The guide emphasizes that cloud-based and hybrid deployment models are becoming increasingly common as technology evolves.
+                </div>
+            </div>
+
+            <!-- SECTION 6: DEPLOYMENT MODELS & CHARACTERISTICS (Questions 47-50) -->
+            <div class="section-header">☁️ Section 6: Deployment Models & Software Characteristics</div>
+
+            <!-- Question 47 - Installation-based Software -->
+            <div class="question-container" data-question="47">
+                <div class="question">47. Which characteristic is typical of installation-based software?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Accessed through web browsers</li>
+                    <li class="option" data-answer="b">B) Requires internet connection</li>
+                    <li class="option" data-answer="c">C) Subscription-based pricing common</li>
+                    <li class="option" data-answer="d">D) Installed directly on user's device</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: D) Installed directly on user's device</strong><br>
+                    Installation-based software is installed directly on the user's device, runs locally using device resources, and may work offline.
+                </div>
+            </div>
+
+            <!-- Question 48 - SaaS Characteristics -->
+            <div class="question-container" data-question="48">
+                <div class="question">48. What is a key characteristic of SaaS (Software as a Service)?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Automatic updates</li>
+                    <li class="option" data-answer="b">B) Works offline</li>
+                    <li class="option" data-answer="c">C) One-time purchase</li>
+                    <li class="option" data-answer="d">D) Installed on local device</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: A) Automatic updates</strong><br>
+                    SaaS characteristics include automatic updates, web browser access, internet connection requirement, and subscription-based pricing.
+                </div>
+            </div>
+
+            <!-- Question 49 - Mobile App Example -->
+            <div class="question-container" data-question="49">
+                <div class="question">49. Which deployment model is Instagram's mobile app an example of?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Web-based software</li>
+                    <li class="option" data-answer="b">B) Mobile applications</li>
+                    <li class="option" data-answer="c">C) Cloud-based software</li>
+                    <li class="option" data-answer="d">D) Installation-based software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: B) Mobile applications</strong><br>
+                    Instagram is a mobile application designed for smartphones and tablets, downloaded from app stores, with touch-optimized interfaces.
+                </div>
+            </div>
+
+            <!-- Question 50 - Staying Current -->
+            <div class="question-container" data-question="50">
+                <div class="question">50. What is recommended for staying current with software technology?</div>
+                <ul class="options">
+                    <li class="option" data-answer="a">A) Stick to familiar software only</li>
+                    <li class="option" data-answer="b">B) Avoid new tools and updates</li>
+                    <li class="option" data-answer="c">C) Stay curious and explore new tools that might improve productivity</li>
+                    <li class="option" data-answer="d">D) Focus only on free software</li>
+                </ul>
+                <div class="feedback">
+                    <strong>Correct Answer: C) Stay curious and explore new tools that might improve productivity</strong><br>
+                    The guide recommends staying curious, keeping learning, and exploring new tools that might improve productivity or capabilities.
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="submit-btn" onclick="submitQuiz()">📝 Submit Quiz</button>
+            <button class="reset-btn" onclick="resetQuiz()">🔄 Reset Quiz</button>
+        </div>
+
+        <div class="score-display" id="scoreDisplay" style="display: none;"></div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            1: 'b', 2: 'b', 3: 'b', 4: 'c', 5: 'c',
+            6: 'b', 7: 'b', 8: 'd', 9: 'c', 10: 'd',
+            11: 'a', 12: 'b', 13: 'c', 14: 'b', 15: 'a',
+            16: 'b', 17: 'a', 18: 'b', 19: 'd', 20: 'a',
+            21: 'b', 22: 'c', 23: 'd', 24: 'a', 25: 'c',
+            26: 'b', 27: 'c', 28: 'b', 29: 'a', 30: 'b',
+            31: 'd', 32: 'a', 33: 'b', 34: 'b', 35: 'd',
+            36: 'd', 37: 'b', 38: 'a', 39: 'b', 40: 'a',
+            41: 'c', 42: 'd', 43: 'b', 44: 'c', 45: 'b',
+            46: 'c', 47: 'd', 48: 'a', 49: 'b', 50: 'c'
+        };
+
+        let selectedAnswers = {};
+        let quizSubmitted = false;
+
+        // Initialize question navigation
+        function initializeQuestionNav() {
+            const nav = document.getElementById('questionNav');
+            for (let i = 1; i <= 50; i++) {
+                const numEl = document.createElement('div');
+                numEl.className = 'question-num';
+                numEl.textContent = i;
+                numEl.onclick = () => scrollToQuestion(i);
+                nav.appendChild(numEl);
+            }
+        }
+
+        function scrollToQuestion(num) {
+            const question = document.querySelector(`[data-question="${num}"]`);
+            question.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Update current question indicator
+            document.querySelectorAll('.question-num').forEach((el, index) => {
+                el.classList.remove('current');
+                if (index + 1 === num) {
+                    el.classList.add('current');
+                }
+            });
+        }
+
+        function updateQuestionNav() {
+            document.querySelectorAll('.question-num').forEach((el, index) => {
+                const questionNum = index + 1;
+                if (selectedAnswers[questionNum]) {
+                    el.classList.add('answered');
+                } else {
+                    el.classList.remove('answered');
+                }
+            });
+        }
+
+        // Add click event listeners to all options
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                if (quizSubmitted) return;
+
+                const questionContainer = this.closest('.question-container');
+                const questionNum = questionContainer.dataset.question;
+                const answer = this.dataset.answer;
+
+                // Remove previous selections
+                questionContainer.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+
+                // Mark current selection
+                this.classList.add('selected');
+                selectedAnswers[questionNum] = answer;
+                
+                updateProgress();
+                updateQuestionNav();
+            });
+        });
+
+        function updateProgress() {
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const answeredQuestions = Object.keys(selectedAnswers).length;
+            const progressPercent = (answeredQuestions / totalQuestions) * 100;
+            
+            document.getElementById('progressBar').style.width = progressPercent + '%';
+            document.getElementById('answeredCount').textContent = answeredQuestions;
+            document.getElementById('progressPercent').textContent = Math.round(progressPercent) + '%';
+        }
+
+        function submitQuiz() {
+            if (Object.keys(selectedAnswers).length < Object.keys(correctAnswers).length) {
+                alert('⚠️ Please answer all questions before submitting.');
+                return;
+            }
+
+            quizSubmitted = true;
+            let score = 0;
+
+            // Check each answer and show feedback
+            Object.keys(correctAnswers).forEach(questionNum => {
+                const questionContainer = document.querySelector(`[data-question="${questionNum}"]`);
+                const options = questionContainer.querySelectorAll('.option');
+                const feedback = questionContainer.querySelector('.feedback');
+                const userAnswer = selectedAnswers[questionNum];
+                const correctAnswer = correctAnswers[questionNum];
+
+                options.forEach(option => {
+                    const optionAnswer = option.dataset.answer;
+                    if (optionAnswer === correctAnswer) {
+                        option.classList.add('correct');
+                    } else if (optionAnswer === userAnswer && userAnswer !== correctAnswer) {
+                        option.classList.add('incorrect');
+                    }
+                });
+
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    feedback.classList.add('correct');
+                } else {
+                    feedback.classList.add('incorrect');
+                    // Add incorrect answer explanation
+                    const originalFeedback = feedback.innerHTML;
+                    const userAnswerText = getUserAnswerText(questionNum, userAnswer);
+                    feedback.innerHTML = `<div style="background: #fff5f5; border: 2px solid #f56565; padding: 15px; border-radius: 8px; margin-bottom: 15px;"><div style="color: #c53030; font-weight: bold; margin-bottom: 8px;">❌ Your Answer: ${userAnswerText}</div><div style="color: #c53030; font-size: 14px;">Why this is incorrect: ${getIncorrectExplanation(questionNum, userAnswer)}</div></div><div style="background: #f0fff4; border: 2px solid #48bb78; padding: 15px; border-radius: 8px;">${originalFeedback}</div>`;
+                }
+                
+                feedback.style.display = 'block';
+            });
+
+            // Display final score
+            const totalQuestions = Object.keys(correctAnswers).length;
+            const percentage = Math.round((score / totalQuestions) * 100);
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            
+            let scoreMessage = `<div style="font-size: 24px; margin-bottom: 15px;">Final Score: ${score}/${totalQuestions} (${percentage}%)</div>`;
+            let gradeIcon = "";
+            let gradeMessage = "";
+            
+            if (percentage >= 90) {
+                gradeIcon = "🏆";
+                gradeMessage = "Outstanding! You have excellent mastery of software types and subcategories!";
+                scoreDisplay.style.background = "linear-gradient(135deg, #f6e05e, #d69e2e)";
+            } else if (percentage >= 80) {
+                gradeIcon = "🥈";
+                gradeMessage = "Very Good! You have solid understanding of software categories!";
+                scoreDisplay.style.background = "linear-gradient(135deg, #e2e8f0, #a0aec0)";
+            } else if (percentage >= 70) {
+                gradeIcon = "🥉";
+                gradeMessage = "Good job! You understand the basics well!";
+                scoreDisplay.style.background = "linear-gradient(135deg, #fbb6ce, #ed64a6)";
+            } else if (percentage >= 60) {
+                gradeIcon = "📚";
+                gradeMessage = "Fair. Review the material and practice more!";
+                scoreDisplay.style.background = "linear-gradient(135deg, #fed7e2, #f687b3)";
+            } else {
+                gradeIcon = "💪";
+                gradeMessage = "Keep studying! Review the comprehensive guide and try again!";
+                scoreDisplay.style.background = "linear-gradient(135deg, #feebc8, #f6ad55)";
+            }
+            
+            scoreDisplay.innerHTML = `<div style="font-size: 60px; margin-bottom: 15px;">${gradeIcon}</div>${scoreMessage}<div style="margin-top: 10px; font-size: 16px; font-weight: normal;">${gradeMessage}</div>`;
+            scoreDisplay.style.display = 'block';
+            
+            // Update progress to 100%
+            document.getElementById('progressBar').style.width = '100%';
+            document.getElementById('progressPercent').textContent = '100%';
+            
+            // Scroll to score
+            scoreDisplay.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetQuiz() {
+            quizSubmitted = false;
+            selectedAnswers = {};
+            
+            // Reset all options
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected', 'correct', 'incorrect');
+            });
+            
+            // Hide all feedback
+            document.querySelectorAll('.feedback').forEach(feedback => {
+                feedback.style.display = 'none';
+                feedback.classList.remove('correct', 'incorrect');
+                // Reset any modified innerHTML
+                const strongTag = feedback.querySelector('strong');
+                if (strongTag && feedback.children.length > 1) {
+                    feedback.innerHTML = feedback.lastElementChild.innerHTML;
+                }
+            });
+            
+            // Hide score display
+            document.getElementById('scoreDisplay').style.display = 'none';
+            
+            // Reset progress bar
+            updateProgress();
+            
+            // Reset question navigation
+            updateQuestionNav();
+            document.querySelectorAll('.question-num').forEach(el => {
+                el.classList.remove('current');
+            });
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Function to get user's answer text
+        function getUserAnswerText(questionNum, userAnswer) {
+            const questionContainer = document.querySelector(`[data-question="${questionNum}"]`);
+            const selectedOption = questionContainer.querySelector(`[data-answer="${userAnswer}"]`);
+            return selectedOption ? selectedOption.textContent : 'Unknown';
+        }
+
+        // Function to provide specific explanations for incorrect answers
+        function getIncorrectExplanation(questionNum, userAnswer) {
+            const explanations = {
+                1: {
+                    'a': 'Physical components are hardware, not software. Software is intangible code and programs.',
+                    'c': 'Internet protocols are communication standards, not software itself.',
+                    'd': 'Electronic circuits are hardware components, not software instructions.'
+                },
+                2: {
+                    'a': 'Five is too many main categories. The three main types are System, Application, and Programming Software.',
+                    'c': 'Two categories are too few to cover all software types comprehensively.',
+                    'd': 'Four categories exceed the standard three main software classifications.'
+                },
+                3: {
+                    'a': 'Understanding software types benefits everyone, not just programmers.',
+                    'c': 'Software categories evolve with technology and new development approaches.',
+                    'd': 'Software value depends on needs and requirements, not just price.'
+                },
+                4: {
+                    'a': 'Software names don\'t necessarily indicate their primary function or category.',
+                    'b': 'Installation size doesn\'t determine the software\'s primary purpose or classification.',
+                    'd': 'The company that made the software doesn\'t determine its functional category.'
+                },
+                5: {
+                    'a': 'Installation location is checked later in the identification process.',
+                    'b': 'Resource usage examination comes after observing access method.',
+                    'd': 'Dependencies are analyzed in later steps of software identification.'
+                },
+                6: {
+                    'a': 'Local-only software is the opposite of cloud computing, which requires internet connectivity.',
+                    'c': 'Programming languages are tools for writing code, not computing service delivery models.',
+                    'd': 'Hardware components are physical parts; cloud computing is about service delivery over internet.'
+                },
+                7: {
+                    'a': 'Writing code is software development, not deployment which comes after development.',
+                    'c': 'Testing is part of development process, while deployment is making software available to users.',
+                    'd': 'UI design is part of development; deployment is about distribution and accessibility.'
+                },
+                8: {
+                    'a': 'Cost should be considered after determining what features you actually need.',
+                    'b': 'Platform compatibility is important but comes after defining requirements.',
+                    'c': 'Learning curve should be evaluated after knowing what you need to accomplish.'
+                },
+                9: {
+                    'a': 'Memory management is a core OS function for allocating and managing system memory.',
+                    'b': 'Process scheduling is essential for managing multiple running programs.',
+                    'd': 'File system management is a fundamental OS responsibility for organizing data.'
+                },
+                10: {
+                    'a': 'iOS is Apple\'s mobile operating system for iPhones, not servers.',
+                    'b': 'Android is Google\'s mobile operating system, not designed for servers.',
+                    'c': 'iPadOS is Apple\'s tablet operating system, not for server environments.'
+                },
+                11: {
+                    'b': 'User account management is handled by the operating system, not device drivers.',
+                    'c': 'Document creation is an application software function, not device driver purpose.',
+                    'd': 'Internet access involves network protocols and applications, not device drivers.'
+                },
+                12: {
+                    'a': 'Operating Systems are the main platform software, not maintenance utilities like CCleaner.',
+                    'c': 'Device Drivers enable hardware communication, not system cleaning functions.',
+                    'd': 'Firmware is low-level hardware control software, not optimization utilities.'
+                },
+                13: {
+                    'a': 'Application software serves end users, while BIOS/UEFI is low-level system firmware.',
+                    'b': 'Utility software performs maintenance tasks, but BIOS/UEFI is fundamental firmware.',
+                    'd': 'Programming software creates other programs, not hardware initialization like BIOS/UEFI.'
+                },
+                14: {
+                    'a': 'File and folder management is handled by the operating system, not BIOS/UEFI.',
+                    'c': 'Internet connectivity is provided by network drivers and software, not BIOS/UEFI.',
+                    'd': 'Application software runs after the operating system loads, not during BIOS/UEFI startup.'
+                },
+                15: {
+                    'b': 'Application software typically runs with user privileges, not administrative access.',
+                    'c': 'Programming software usually doesn\'t require administrative privileges for normal use.',
+                    'd': 'Entertainment software runs with standard user permissions, not administrative access.'
+                },
+                16: {
+                    'a': 'Application Software performs user tasks; device drivers are system-level components.',
+                    'c': 'Programming Software creates other software; device drivers enable hardware communication.',
+                    'd': 'Web browsers access internet content; device drivers enable hardware-OS communication.'
+                },
+                17: {
+                    'b': 'Application Software serves end users for specific tasks, not system management.',
+                    'c': 'Programming Software creates other programs, not manages computer resources.',
+                    'd': 'Utility Software performs maintenance tasks, but Sarah needs a complete operating system.'
+                },
+                18: {
+                    'a': 'Operating Systems provide the platform, but David needs specific optimization tools.',
+                    'c': 'Device Drivers enable hardware communication, not system optimization.',
+                    'd': 'Firmware is low-level hardware control software, not performance optimization tools.'
+                },
+                19: {
+                    'a': 'Google Workspace includes Docs, Sheets, Slides, and Gmail, not the Microsoft applications.',
+                    'b': 'LibreOffice includes Writer, Calc, Impress, but not the specific Microsoft applications.',
+                    'c': 'Apple iWork includes Pages, Numbers, Keynote, not the Microsoft suite components.'
+                },
+                20: {
+                    'b': 'Blender is 3D modeling software, not a note-taking productivity tool.',
+                    'c': 'Spotify is music streaming software, not for note-taking.',
+                    'd': 'Steam is gaming platform software, not a productivity tool for notes.'
+                },
+                21: {
+                    'a': 'Productivity Software includes office suites and document tools, not graphics design.',
+                    'c': 'Business Software supports business operations like CRM and accounting, not creative work.',
+                    'd': 'Communication Software enables messaging and collaboration, not graphics design.'
+                },
+                22: {
+                    'a': 'Audacity is audio editing software, not 3D modeling.',
+                    'b': 'Discord is communication software for chat and voice, not 3D modeling.',
+                    'd': 'QuickBooks is accounting software for business finances, not 3D modeling.'
+                },
+                23: {
+                    'a': 'Entertainment Software is for games and media, not professional communication.',
+                    'b': 'Educational Software supports learning activities, not video conferencing.',
+                    'c': 'Business Software is broader; Zoom specifically falls under Communication Software.'
+                },
+                24: {
+                    'b': 'Accounting software manages financial transactions, not customer relationships.',
+                    'c': 'ERP systems manage overall business resources, while Salesforce specifically focuses on CRM.',
+                    'd': 'Human Resources software manages employee-related activities, not customer management.'
+                },
+                25: {
+                    'a': 'System Software manages hardware and provides platforms; browsers are end-user applications.',
+                    'b': 'Programming Software creates other software; browsers are for end-user web access.',
+                    'd': 'Firmware is low-level hardware control software; browsers are high-level applications.'
+                },
+                26: {
+                    'a': 'Blender is 3D modeling software, not for document creation.',
+                    'c': 'AutoCAD is computer-aided design software, not for general document creation.',
+                    'd': 'Final Cut Pro is video editing software, not for document creation.'
+                },
+                27: {
+                    'a': 'Photoshop, Word, and Excel are application software, not cloud storage services.',
+                    'b': 'Windows, macOS, and Linux are operating systems, not cloud storage services.',
+                    'd': 'Chrome, Firefox, Safari, and Edge are web browsers, not cloud storage services.'
+                },
+                28: {
+                    'a': 'Productivity Software includes office tools, not graphics design applications.',
+                    'c': 'Business Software supports business operations, not creative design work.',
+                    'd': 'Communication Software enables messaging and collaboration, not image manipulation.'
+                },
+                29: {
+                    'b': 'Productivity Software includes general office tools, but Jenny needs specific business functions.',
+                    'c': 'Creative Software is for artistic work, not business management.',
+                    'd': 'Educational Software supports learning, not business operations.'
+                },
+                30: {
+                    'a': 'Entertainment Software is for games and media, not professional communication.',
+                    'c': 'Educational Software supports learning, but Maria needs communication tools.',
+                    'd': 'Creative Software is for artistic work, not communication and collaboration.'
+                },
+                31: {
+                    'a': 'Graphics and Design software is for visual content, not audio production.',
+                    'b': 'Web Design software creates websites, not audio content.',
+                    'c': '3D Modeling software creates three-dimensional objects, not music.'
+                },
+                32: {
+                    'b': 'System Utilities perform maintenance tasks, but Robert needs comprehensive server management.',
+                    'c': 'Device Drivers enable hardware communication, not complete server control.',
+                    'd': 'Firmware is low-level hardware software, not full server operating systems.'
+                },
+                33: {
+                    'a': 'Financial Software manages monetary transactions, not patient medical records.',
+                    'c': 'Scientific and Engineering Software is for research and analysis, not patient care.',
+                    'd': 'Security Software protects against threats, but Dr. Martinez needs specialized medical tools.'
+                },
+                34: {
+                    'a': 'Creative Software alone cannot handle complex mathematical calculations and analysis.',
+                    'c': 'Programming Software provides development tools, but Professor Johnson needs specialized mathematical software.',
+                    'd': 'Business Software manages business operations, not academic research and mathematical analysis.'
+                },
+                35: {
+                    'a': 'Application Software performs user tasks; device drivers are system-level components.',
+                    'b': 'Programming Software creates applications, not enables hardware communication.',
+                    'c': 'Entertainment Software provides games and media, not hardware connectivity.'
+                },
+                36: {
+                    'a': 'Android Studio is for Android app development, not iOS/macOS development.',
+                    'b': 'PyCharm is specifically for Python development, not iOS/macOS applications.',
+                    'c': 'WebStorm is for web development, not native iOS/macOS applications.'
+                },
+                37: {
+                    'a': 'IDEs are comprehensive development environments, not version control systems.',
+                    'c': 'Compilers and Interpreters convert code to executable programs, not track changes.',
+                    'd': 'Database Management Systems store and manage data, not track code versions.'
+                },
+                38: {
+                    'b': 'Relational databases use structured tables and SQL, while MongoDB is document-based NoSQL.',
+                    'c': 'Cloud refers to deployment model, not database structure type.',
+                    'd': 'Embedded databases are lightweight for applications, while MongoDB is a full-featured NoSQL database.'
+                },
+                39: {
+                    'a': 'Dropbox is cloud storage, not version control for code management.',
+                    'c': 'Google Drive is document storage and collaboration, not code version control.',
+                    'd': 'OneDrive is file storage and sync, not specialized for software development.'
+                },
+                40: {
+                    'b': 'Both application and programming software can run on various platforms; location is not the key difference.',
+                    'c': 'Both types can be free or paid; cost is not the distinguishing factor between them.',
+                    'd': 'Both types can work online or offline; internet dependency is not the key difference.'
+                },
+                41: {
+                    'a': 'System Software manages hardware and OS functions, not software development tools.',
+                    'b': 'Application Software serves end users, not software developers\' coding needs.',
+                    'd': 'Communication Software enables messaging, not software development activities.'
+                },
+                42: {
+                    'a': 'Version Control Systems track code changes, not provide development environments.',
+                    'b': 'Database Management Systems store data, not provide coding environments.',
+                    'c': 'Compilers convert code to executables, but Alex needs a complete development environment.'
+                },
+                43: {
+                    'a': 'Scientific and Engineering Software is for research and analysis, not security protection.',
+                    'c': 'Financial Software manages monetary transactions, not antivirus protection.',
+                    'd': 'Healthcare Software supports medical operations, not general security.'
+                },
+                44: {
+                    'a': 'Security Software protects against threats, not mathematical analysis.',
+                    'b': 'Financial Software manages monetary data, not scientific calculations.',
+                    'd': 'Healthcare Software supports medical operations, not mathematical research.'
+                },
+                45: {
+                    'a': 'Netflix, Spotify, and Instagram are service consumers, not cloud infrastructure providers.',
+                    'c': 'Adobe, Autodesk, and Blender are software companies, not major cloud service providers.',
+                    'd': 'Steam, Epic Games, and PlayStation are gaming platforms, not cloud infrastructure providers.'
+                },
+                46: {
+                    'a': 'Desktop-only applications are becoming less common as cloud solutions grow.',
+                    'b': 'Command-line interfaces remain specialized tools, not increasingly common.',
+                    'd': 'Single-platform software is decreasing as cross-platform solutions become preferred.'
+                },
+                47: {
+                    'a': 'Web browser access is characteristic of web-based software, not installation-based.',
+                    'b': 'Internet requirements are typical of cloud-based software, not installation-based.',
+                    'c': 'Subscription pricing is common in SaaS models, not traditional installation-based software.'
+                },
+                48: {
+                    'b': 'Working offline is characteristic of installation-based software, not SaaS.',
+                    'c': 'One-time purchases are typical of traditional software, not subscription-based SaaS.',
+                    'd': 'Local installation is characteristic of traditional software, not cloud-based SaaS.'
+                },
+                49: {
+                    'a': 'Web-based software runs in browsers, while Instagram is a downloaded mobile app.',
+                    'c': 'Cloud-based refers to server processing, while Instagram is a client-side mobile app.',
+                    'd': 'Installation-based typically refers to desktop software, not mobile apps.'
+                },
+                50: {
+                    'a': 'Limiting yourself to familiar software prevents learning about better tools.',
+                    'b': 'Avoiding new tools and updates can leave you using outdated, less efficient software.',
+                    'd': 'Focusing only on free software may limit access to powerful professional tools.'
+                }
+            };
+            
+            return explanations[questionNum]?.[userAnswer] || 'This option doesn\'t align with the correct answer based on the software guide principles and subcategories.';
+        }
+
+        // Initialize the quiz
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeQuestionNav();
+        });
+
+        // Add scroll listener to update current question indicator
+        window.addEventListener('scroll', function() {
+            if (quizSubmitted) return;
+            
+            const questions = document.querySelectorAll('.question-container');
+            const scrollPos = window.scrollY + window.innerHeight / 2;
+            
+            questions.forEach((question, index) => {
+                const rect = question.getBoundingClientRect();
+                const questionTop = rect.top + window.scrollY;
+                const questionBottom = questionTop + rect.height;
+                
+                if (scrollPos >= questionTop && scrollPos <= questionBottom) {
+                    document.querySelectorAll('.question-num').forEach(el => {
+                        el.classList.remove('current');
+                    });
+                    document.querySelectorAll('.question-num')[index].classList.add('current');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
